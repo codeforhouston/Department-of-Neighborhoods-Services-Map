@@ -1,0 +1,418 @@
+html {
+	height: 			100%
+}
+
+body {
+	margin: 			0px auto;
+	font: 				75%/120% Verdana,Arial, Helvetica, sans-serif;
+	height: 			100%;
+	padding: 			0;
+}
+p {
+	padding: 			0 0 0;
+	font-weight:		bold;
+}
+.msg_list {
+	margin: 			0px 0px;
+	padding: 			0px 0px;
+	width: 				270px;
+	background-color: 	#FFFFFF;
+}
+.msg_head {
+	padding: 			10px 5px;
+	cursor: 			pointer;
+	position:			relative;
+	background-color:	#37AFE6;
+	margin:				5px 0px;
+	border: 			1px solid #000;
+	border-radius:	5px;
+}
+.msg_body {
+	position:			relative;
+	padding: 			10px 5px;
+	width: 				258px;
+	margin: 			5px 0px;
+	border: 			1px solid #000;
+	border-radius: 		5px;
+	background-color:	#ECE8EC;
+}
+#tabs-4,
+#tabs-2,
+#tabs-1{
+	padding:			10px 10px; 
+	cursor: 			auto;
+	width:				260px;
+	border-color:		#ff0000;
+}
+#tabs-3{
+	padding:			10px 10px; 
+	cursor: 			auto;
+	width:				260px;
+	border-color:		#ff0000;
+}
+#tabs {
+	background-image: 	url('City_of_Houston_seal.png');
+	position: 			absolute;
+	top:				0px;
+	bottom: 			0px;
+	width: 				303px;
+	font-family: 		arial;
+	font-size: 			15px; 
+	overflow: 			scroll;
+	z-index:			2;
+}
+#Trans{
+background-color:	#A9F5E1;
+}
+#GovBo{
+background-color:	#BCF5A9;
+}
+#PubSa{
+background-color:	#F7977A;
+}
+#CityServ{
+background-color:	#FFCC66;
+}
+#Heal{
+background-color:	#F49AC2;
+}
+#Edu{
+background-color:	#FFFF99;
+}
+
+#Transportation{
+background-color:	#A9F5E1;
+}
+#Government_Boundaries{
+background-color:	#BCF5A9;
+}
+#Public_Safety{
+background-color:	#F7977A;
+}
+#Public_Facilities{
+background-color:	#FFCC66;
+}
+#Health{
+background-color:	#F49AC2;
+}
+#Education_Arts_Recreation{
+background-color:	#FFFF99;
+}
+
+#slider {				
+	left:				45px;
+	top:				10px;
+	width:				160px;
+}
+#map_canvas {
+	margin-left: 		308px;
+	height:				100%; 
+}
+#walkingDirections , 
+#drivingDirections,
+#PTDirections{
+	border-radius: 40px;
+	padding: 5px;
+	margin-left: 7px;
+}
+#activeDirections{filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+-moz-opacity: 0.4;
+opacity: 0.4;
+	border-radius: 40px;
+	padding: 5px;
+}
+#transitOptionsLabel {
+	font-weight: bold;
+	left: 100px;
+	position: relative;
+	font-size: 12pt;
+}
+.dirbtn {
+	margin-left: 		10px;
+	padding:			2px;
+	border-radius:		20px;
+}
+.sidebar_box {
+	padding: 			5px 5px;
+	margin: 			10px 0px;
+	width: 				242px;
+	left:				0;
+	border: 			1px solid #000;
+	border-radius: 		20px;
+	background-color: 	#FFFFFF;
+	cursor: 			pointer;
+	word-wrap:			break-word;
+}
+#selected {
+	background-color:		#C2E0FF;
+	cursor: 			pointer;
+	word-wrap: 			break-word;
+}
+.legend_box {
+	padding: 			10px 10px;
+	margin: 			10px 0px;
+	width: 				245px;
+	border: 			2px solid #000;
+	background-color:		#FFFFFF;
+}
+.layer_label {
+	display: 			block;
+	text-align:			center;
+	font-size: 			14pt;
+}
+.closest_feature_label{
+	font-weight:			bold;
+	text-align:			left;
+	font-size: 			16pt;
+	margin: 			0px 0px;
+	padding: 			0px 0px;
+}
+.info_window_box {
+	margin: 			0px 0px;
+	padding: 			0px 0px;
+	left: 				0;
+}
+.info_button {
+	cursor: pointer;
+	border: 			1px solid;
+	border-color:			#B0B0B0;
+	background-color:		#D9D9D9;
+	color: 				black;
+	font-size:			1em;
+	margin: 			3px;
+	border-radius:			25px;
+}
+
+.checkbox_label {
+	font-size: 			12pt;
+}
+.tab_label {
+	font-weight:			bold;
+	color: 				white;
+}
+.meta_info {
+	position: 			relative;
+	left: 				25px;
+	width: 				220px;
+	font-style:			italic;
+	font-size: 			9pt;
+}
+
+.location_tabs_info{
+	display:			none; 
+	width:				220px; 
+	position: 			relative; 
+	text-align:			justify;
+	font-style:			italic;
+	font-size: 			9pt;
+}
+.gis_info_title {
+	font-size: 			14pt;
+	font-weight:			bold;
+	border-bottom-width:		1px;
+	border-bottom-style:		solid;
+	border-bottom-color:		gray;
+	text-align:			center;
+	margin-top:			3px;
+}
+.gis_info_key {
+	font-weight:			bold;
+}
+.gis_info_value {
+	margin: 			2px;
+}
+
+#load_image {
+    display:				none;
+    position:   			absolute;
+    z-index:    			1000;
+    top:	    			0;
+    left:       			0;
+    height:    				100%;
+    width:      			100%;
+    background: 			rgba( 255, 255, 255, 0 ) 
+						url('loadingicon2.gif') 
+						308px -30px 
+						no-repeat;
+}
+
+
+#u_marker{
+	display:			block;
+}
+
+.pretty_division{
+border-bottom-width: 			1px;
+border-bottom-style: 			solid;
+border-bottom-color: 			gray;
+margin-bottom:				10px;
+width:					285px;
+left:					0px;
+}
+
+.ex{
+right: 					-5px;
+top: 					-5px;
+}
+
+.DropDownBox {
+background: none repeat scroll 0 0 transparent !important;
+border: 0 none;
+cursor: pointer;
+font-size: 14px;
+height: 28px;
+margin: 5px 0;
+overflow: hidden;
+padding: 2px 0 0 10px;
+text-transform: uppercase;
+width: 220px;
+}
+ 
+.DropDownBox  option {
+background: none repeat scroll 0 0 #CCCCCC;
+border-top: 1px dotted #3e332b !important;
+display: block;
+font-weight: normal !important;
+margin: 0;
+padding: 5px;
+border-right:0;
+}
+
+#hide_panel {
+	cursor: pointer;
+	position: 			absolute;
+	padding:			14px 14px;
+	left: 				304px;
+	top: 				4px;
+	border: 			1px solid;
+	border-color: 			#B0B0B0;
+	background-image: 		url('left_arrow.png');
+	background-repeat:		no-repeat;
+	background-position:		7px;
+	background-color: 		#FFFFFF;
+	margin: 			3px;
+	border-radius:			5px;
+}
+
+#show_panel {
+	cursor: pointer;
+	position: 			absolute;
+	padding:			14px 14px;
+	left: 				0px;
+	top: 				4px;
+	border: 			1px solid;
+	border-color: 			#B0B0B0;
+	background-image: 		url('right_arrow.png');
+	background-repeat:		no-repeat;
+	background-position:		8px;
+	background-color: 		#FFFFFF;
+	margin: 			3px;
+	border-radius:			5px;
+}
+
+#hidden_print {
+	position: 			absolute;
+	padding:			14px 14px;
+	left: 				0px;
+	top: 				40px;
+	border: 			1px solid;
+	border-color: 			#B0B0B0;
+	background-image: 		url('print_icon_small.png');
+	background-repeat:		no-repeat;
+	background-position:		3px;
+	background-color: 		#FFFFFF;
+	margin: 			3px;
+	border-radius:			25px;
+}
+
+#print {
+	position: 			absolute;
+	padding:			14px 14px;
+	left: 				304px;
+	top: 				40px;
+	border: 			1px solid;
+	border-color: 			#B0B0B0;
+	background-image: 		url('print_icon_small.png');
+	background-repeat:		no-repeat;
+	background-position:		4px;
+	background-color: 		#FFFFFF;
+	margin: 			3px;
+	border-radius:			5px;
+}
+
+#help {
+	cursor: pointer;
+	position: 			absolute;
+	padding:			20px 14px;
+	left: 				304px;
+	top: 				42px;
+	border: 			1px solid;
+	border-color: 			#B0B0B0;
+	background-image: 		url('help.png');
+	background-repeat:		no-repeat;
+	background-position:	7px;
+	background-color: 		#FFFFFF;
+	margin: 			3px;
+	border-radius:			5px;
+}
+
+#helpWindow p{
+	font-size: 			10pt;
+}
+.transit1{
+margin-left: 				65px;
+margin-bottom:				5px;
+width:					120px;
+}
+#defaultDirections{
+margin-left:				40px;
+cursor: 				pointer; 
+background-color: 			#00FFFF;
+}
+#directionsMain, #query{
+background-color: 			#FFFFFF;
+}
+
+.button_new {
+	cursor: pointer;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color: black;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.button_new:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.button_new:active {
+	position:relative;
+	top:1px;
+}
+
+
+#location_msg{
+	background-color: #CCFF66;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:5px;
+	width: 	258px;
+}
+#smallButton{
+padding:2px;
+}

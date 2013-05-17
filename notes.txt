@@ -1,0 +1,28 @@
+#added new ids to .msg_head
+
+MSG_BODY
+RENAME Category IDS
+
+in .html
+<button class = 'info_button' style="width:260px" onclick="getLocation()">Find Me!</button>
+changes to:
+<button class = 'info_button' onclick="getLocation()">Find Me!</button>
+
+changed colors
+changed border radius
+changed slider width and text and text position
+
+
+
+
+#CANT SEE LOADING ICON: CHANGE TO WHITE
+#FIGURE OUT BETTER BUTTON LAYOUT FOR "OR FIND ME" CHANGE TO "FIND MY LOCATION" OR "LOCATE ME"?
+#CONFUSING: CANT CLICK ON CLOSEST LOCATIONS, CAN ONLY CLICK ON "SELECTED FEATURES"
+#CAN WE HAVE THE "CLOSEST LOCATIONS" pop up at the top of "SELECTED FEATURES"?
+#REWORK SEARCH BOX TO GET RID OF THE "SELECT A SERVICE" DIRECTIONS
+#WHERE DO WE PUT TRANSLATE, PRINT, AND FEEDBACK BUTTONS?
+#Should we force people to input an address?
+
+#CREATE A GOOG ANALYTICS ACCOUNT
+#ADD ANALYTICS
+#CREATE ALL BUTTONS (LEAVE IT TO BOYS TO ADD FUNCTIONALITY)

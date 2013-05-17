@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+		<!-- Google Maps Libraries //-->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBnJvw_2TGCbDoXCvs8rkXB45B6xeBx9Kc&sensor=true"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/styledmarker/src/StyledMarker.js"></script>
+
+		<!-- ArcGIS Library //-->
+		<script src="http://google-maps-utility-library-v3.googlecode.com/svn-history/r172/trunk/arcgislink/src/arcgislink.js" type="text/javascript"></script> 
+		
+		<!-- Our code //-->
+		<script type="text/javascript" src="./mapdriver.js"></script>
+
+		<!-- Mapservices //-->
+		<script type="text/javascript" src="./mapservices.js"></script>
+
+		<!-- Metadata //-->
+		<script type="text/javascript" src="./definitions.js"></script>
+
+		<!-- JQuery/Ajax //-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+		<!-- JQuery StyleSheets //-->
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+		<!-- Our custom CSS StyleSheet //-->
+		<link href="./ss.css" rel="stylesheet" type="text/css">
+
+		<!-- KMLmapservice //-->
+		<script type="text/javascript" src="./KMLLayers.js"></script>
+		
+		<!-- Analytics //-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33627352-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+	</head>
+
+	<body onload="initialize()" style="font-size:90.5%; display:none;">
+	
+		<!-- Left Options Panel //-->
+		<div id="tabs">
+			<!--  Main Tabs (Services, Locations, Legend) //-->
+			<ul>
+				<li id = 'servicesLink'><a onclick="selectServices()">Services</a></li>
+				<li id = 'locationsLink'><a onclick="selectLocations()">Locations</a></li>
+				<li id = 'legendLink'><a onclick="selectLegend()">Legend</a></li>
+			</ul>
+	
+			<!--  Services Tab //-->
+			<div id="tabs-1" class="scroll-pane-arrows">
+
+				<!-- Opacity Bar //-->
+
+				<div id="slider">
+				<font color="black" style="position:absolute; top:-4px; left:-55px">visible</font>
+				<font color="black" style="position:absolute; top:-4px; left:171px;">invisible</font>
+				</div>
+				</br>
+				
+				<!-- Data/Layer Categories //-->
+				<div id = "scroll1" class="msg_list">
+				
+					<p class="msg_head" id="Trans">Transportation</p>
+					<div class="msg_body" id="Transportation"></div>
+					
+					<p class="msg_head" id="Edu">Education, Arts, and Recreation</p>
+					<div class="msg_body" id="Education_Arts_Recreation"></div>
+	
+					<p class="msg_head" id="Heal">Health</p>
+					<div class="msg_body" id="Health"></div>
+					
+					<p class="msg_head" id="CityServ">City Services</p>
+					<div class="msg_body" id="Public_Facilities"></div>
+					
+					<p class="msg_head" id="PubSa">Public Safety</p>
+					<div class="msg_body" id="Public_Safety"></div>
+					
+					<p class="msg_head" id="GovBo">Government Boundaries</p>
+					<div class="msg_body" id="Government_Boundaries"></div>
+					
+				</div>
+			</div><!-- End of Services Tab //-->
+			
+			<!-- Locations Tab //-->
+			<div id="tabs-3">
+				
+				<!--  Locations Tabs (Directions, Search, Closest Locations, Selected Features) //-->
+				<button class = "button_new" id="smallButton" style="width:269px;" onclick="getLocation()">Find Me!</button>
+				<div id="directions1">
+						<!--  Directions //-->
+						<p class="msg_head" id="location_msg">Directions</p>
+							<div class ="msg_body" id="directionsMain">
+
+								<div id="directionsInfo" class = "location_tabs_info">Enter desired origin and destination addresses in the boxes below, then optionally choose a transportation mode and click "Get Directions".  Alternatively, click features on the map, and click "Get Directions To Here!"</br>	
+								</div>
+								<div id="dirFunctions">
+									<input type='image' class='button_new' src='car3small.png' id='drivingDirections' style="margin-left:30px; border:2px solid" onclick='javascript: changeDirectionsMode(google.maps.TravelMode.DRIVING)'></input>
+									<input type='image' class='button_new' src='walk3small.png' id='walkingDirections' onclick='javascript: changeDirectionsMode(google.maps.TravelMode.WALKING)'></input>
+									<input type='image' class='button_new' src='bus3_small.png' id='PTDirections' onclick='javascript: transitSetup(true)'></input>
+									</br>
+
+									A: <input type='text' id='originAddress' style="margin-bottom:4px" onkeydown="if(event.keyCode == 13) inputAddress(this.value)"></input>
+									<input type='image' src='swap.png' style="left:237px; top:88px; position:absolute" onclick="swapAddresses()"></input></br>
+									B: <input type='text' style="margin-bottom:5px" id='destinationAddress' onkeydown="if(event.keyCode == 13) getDirections(currentDirectionsMode)"></input>
+									
+									<div id='transitOptions' style="display: none">
+										<label id='transitOptionsLabel'>Options:</label>
+										</br>
+										<select style="margin-top:5px"  class="transit1" id='transitMode' onchange='changeTransitMode()'>
+											<option value="Leave Now">Leave Now</option>
+											<option value="Depart At">Depart At</option>
+											<option value="Arrive At">Arrive At</option>
+										</select>
+										<input class="transit1" style="width:115px;" type='text' id='transitDate' value='MM/DD/YYYY' disabled='true' onclick='javascript: if (this.value == "MM/DD/YYYY") this.value = ""'></input>
+							
+										<select class="transit1" id='transitTime' disabled='true'>
+										</select>
+									</div>
+									<button type='button' id='defaultDirections' class = 'button_new' onclick='javascript: getDirections(currentDirectionsMode)'>Get Directions</button>
+								</div>
+
+								<div id="directions">
+								</div>
+
+								<div id="printAndClear" style="display:none">
+									<button onclick='printDirections()' style="margin-top:10px; margin-left:70px; cursor: pointer" class = 'button_new' id="smallButton">Print</button>
+									<button onclick='clearDirections()' style="margin-top:5px;margin-left:5px; cursor: pointer" class = 'button_new' id="smallButton">Clear</button>
+									</br>
+								</div>
+							</div>
+				</div>
+						<!--  Search //-->
+
+
+
+
+						<p class="msg_head" id="location_msg">Search</p>
+							<div class="msg_body" id="query">
+							
+
+							<!--  Address Input Form //-->
+								<div>
+									<input type='text' id='address' value='Enter Your Location Here' onkeydown="if(event.keyCode == 13) inputAddress(this.value)" onclick="if (this.value == 'Enter Your Location Here') this.value = ''" style='display:inline;width:200px'></input>
+									<button class = "button_new" id="smallButton" onclick = "inputAddress(document.getElementById('address').value)" style="right:5px">Go</button>
+									</br></br>
+								</div>
+
+
+								<div id = "searchInfo" class = "location_tabs_info">Turn on a service (from the Services tab above) and then follow the numbered steps below.
+								</div>
+								<div id="query main">
+									<label style='margin-left: 5px; font-weight: bold;'>Search for service locations from...</label>
+									<div class="DropDownBox">
+										<select id="dropDownLayer" onchange="changeLayer()" style="width:200px;margin-left:20px">
+											<option value="service">1. Select Visible Service</option>
+											<option value=""></option>
+										</select>
+									</div>
+								</div>
+								<button class = "button_new" id="smallButton" style="display: block; position: relative; left: 30px; width:199px" onclick="searchByField()">Get Closest Locations</button>
+								<button class = "button_new" id="smallButton" style="margin-left:30px; margin-top:5px;width:199px" onclick="$('#advancedOptions').toggle()">Advanced Options</button>
+									<div id="advancedOptions" style="display:none; text-align:center; font-weight:bold">
+										
+										<div class="DropDownBox">
+											<select id="dropDownFields" onchange="changeField()" style="width:200px; margin-left:20px;">
+												<option value="field">2. Select Field</option>
+												<option value=""></option>
+											</select>
+											</br>
+										</div>
+					
+										<div class="DropDownBox">	
+											<select id="dropDownValue" style="margin-left:20px; width:200px">
+												<option value="Value">3. Select Value</option>
+												<option value=""></option>
+											</select>
+										</div>
+										<label style='margin-left:0px; font-weight: bold;'>Results are ordered by</label></br>
+										<label style='margin-left:0px; font-weight: bold;'>their distance from you.</label></br>
+										<button class = "button_new" id="smallButton" style="display: block; position: relative; left: 90px; margin-top:5px;" onclick="searchByField()">Search</button>
+								
+									</div>
+
+									<button class = "button_new" id="smallButton" style="display: block; position: relative; left: 30px;margin-top:5px;width:199px" onclick="clearAll()">Clear Results</button>
+									</br></br>
+							</div>
+							
+							
+						<!--  Selected Features //-->
+
+							<!-- Selected Features Data //-->
+							<div class="msg_body" id="scroll4" style="border:none; background-color:transparent;">
+							
+								<div id = "selectedInfo" class = "location_tabs_info">Click on a particular service location to see related data below.  Clicking on the data will also center the map on that particular location.
+								</div>
+							
+							</div>
+					
+			</div><!-- End of Locations Tab -->
+			
+			<!-- Legend Tab //-->
+			<div id = "tabs-2" class="scroll-pane-arrows">
+				<div id = "scroll2">
+				</div>
+			</div><!-- End of Legend Tab //-->
+			
+		</div><!-- End of Panel -->
+		
+		<!-- Google Base Map //-->
+		<div id="map_canvas"></div>
+
+		<div id="helpWindow" style="display:block; width:288px; padding:10px; position:absolute; left:0px; top:0px; bottom: 0px; overflow:auto; text-align:justify">
+			<p><b>Certain parts of the site are broken/don't work correctly!</b></p>  For best performance, use the most recent version of Firefox (V10 and on).  If you use Internet Explorer, make sure you have the most recent release. If you are using Google chrome, some features, such as printing and "Find Me!" will not work.
+			<p><b>Sometimes, when I first load the page, the Loading Icon won't go away!</b></p>  This is a known issue that may have to do with our data servers; refresh the page if this happens.
+			<p><b>How do I view the locations of city services available to me?</b></p>  Under the "Services" tab, click the checkbox next to the particular service you would like to view.  Left-click a specific service spot on the map for more information on that location.
+			<p><b>When I enter my address, it brings me to the wrong location!</b></p>  Sometimes two cities can contain the same street address.  To accurately locate your address, you may need to include your city, state, and zip code.
+			<p><b>How do I get directions to a particular location on the map?</b></p>  Under the directions tab, input the address you would like to leave from in the text box marked 'A'.  Then, left-click on a service location on the map and click "Get Directions To Here!".
+			<p><b>How do I find the locations of a service near me?</b></p>  Turn on the service you would like the locations of by checking the checkbox beside it.  Then, under the 'Search' tab, input your address in the text box.  Select the service you would like the closest locations of from the dropdown menu, and click "Search".  The results will be ordered by distance from you.
+			<p><b>How do I filter my search by things other than distance?</b></p>  Follow the same directions you would to submit a regular search, but click 'Advanced Options'.  Select an attribute you would like to search in, and then select a value to search for.  Your search will display the locations that match this search, ordered by distance from you.
+			<p><b>I don't know what the symbols on the map mean when I turn on a service!</b></p>  Click the tab labeled 'Legend'.  Currently visible services on the map will have their corresponding symbols labelled here.
+			<p><b>Why can't I see the names of some service locations on the map?</b></p>  Zoom in to the map, either by using your mouse scroll wheel or by the Google zoom tool on the upper right.  Services have specific max zoom levels, and zooming out beyond these levels will hide the labels to reduce clutter.
+			<p><b>What is wrong with the bicycling layer? I can't select, search, or interact with it in any way!</b></p>  The bicycle layer is actually a Google base layer, just like the Google streets map that is on by default; as such, it does not support any of our interactive features.
+			<p><b>Why is the "Find Me!" button not working for me?</b></p>  The "Find Me!" button has limited capability which differs according to browser. It does not work on Google Chrome at the moment.</br>
+			<p><b>Why is the "Find Me!" button not accurately locating me?</b></p>  The "Find Me!" button has limited capability which differs according to location and browser. It does not work on Google Chrome at the moment.</br>
+			<p><b>When I print the page, the map is missing!  What should I do?</b></p>  Printing is a known issue with maps like this.</br></br>
+					In your browser, make sure the option corresponding to "Print Background (colors & images)" is checked, which may be located under the "Page Layout" option.
+																						</br></br>
+																						It is a known issue that Google Chrome is not able to print the map.</br>
+																						</br>
+																						If your browser is unable to properly display the map when printing, you can take a screenshot instead.  Hold the 'alt' key and press "Prt Sc". Open Paint or another image editing program, right click on the canvas, and select 'paste'.  Then, print that.</p>
+			</br>
+			<p>Contact the City of Houston at contact.don@houstontx.gov with questions or suggestions.</p>
+		</div>
+
+		
+		<!-- Loading Screen -->
+		<div id="load_image"></div>
+
+
+		<div id = "hide_panel" onclick="sidebarToggle()"></div>
+
+		<div id = "help" onclick="(function() {
+					if (document.getElementById('tabs').style.display != 'none') {
+						document.getElementById('help').style.backgroundImage='url(hidehelp.png)';
+						document.getElementById('help').style.backgroundPosition='1px';
+						document.getElementById('tabs').style.display='none';
+						document.getElementById('helpWindow').style.display='block';
+					}
+					else {
+						document.getElementById('help').style.backgroundImage='url(help.png)';
+						document.getElementById('help').style.backgroundPosition='7px';
+						document.getElementById('helpWindow').style.display='none';
+						document.getElementById('tabs').style.display='block';
+					}
+		})()"></div>
+
+
+	</body>
+</html>
